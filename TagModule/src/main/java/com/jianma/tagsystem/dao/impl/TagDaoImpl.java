@@ -55,4 +55,15 @@ public class TagDaoImpl implements TagDao {
 		return query.list();
 	}
 
+	@Override
+	public List<Tag> getListTagByCategory(int id) {
+
+		Session session = sessionFactory.getCurrentSession();
+		String hql = " from Tag t where t.tagCategory.id = ? order by t.createTime desc";
+		
+		Query query = session.createQuery(hql);
+		query.setParameter(0, id);
+		return query.list();
+	}
+
 }

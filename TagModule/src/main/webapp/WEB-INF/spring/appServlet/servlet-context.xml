@@ -40,9 +40,9 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/**/*.html" location="/WEB-INF/views/html"/>
-	
+	<!--
 	<context:property-placeholder  location="classpath:config.properties"/>
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+	 Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -50,20 +50,21 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<context:component-scan base-package="com.jianma.xtdm" />
+	<context:component-scan base-package="com.jianma.tagsystem" />
     
 	<!-- MySql数据库连接池配置 -->
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url"
-			value="jdbc:mysql://192.168.64.128:3306/xtdm?useUnicode=true&amp;characterEncoding=utf8" />
+			value="jdbc:mysql://192.168.3.110:3306/tag_example?useUnicode=true&amp;characterEncoding=utf8" />
 		<beans:property name="username" value="root" />
 		<beans:property name="password" value="root" />
 		<beans:property name="timeBetweenEvictionRunsMillis"
 			value="3600000" />
 		<beans:property name="minEvictableIdleTimeMillis"
-			value="3600000" />
+			value="3600000" />  
+        <beans:property name="initialSize" value="30"/> 
 		<beans:property name="maxActive" value="200"></beans:property>
 		<beans:property name="minIdle" value="50"></beans:property>
 	</beans:bean>
@@ -73,7 +74,7 @@
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
 		<beans:property name="packagesToScan">
 			<beans:list>
-				<beans:value>com.jianma.xtdm</beans:value>
+				<beans:value>com.jianma.tagsystem</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">

@@ -40,7 +40,7 @@ public class TagCategoryDaoImpl implements TagCategoryDao {
 
 	@Override
 	public void updateTagCategory(TagCategory tagCategory) {
-		sessionFactory.getCurrentSession().save(tagCategory);
+		sessionFactory.getCurrentSession().update(tagCategory);
 	}
 
 	@Override

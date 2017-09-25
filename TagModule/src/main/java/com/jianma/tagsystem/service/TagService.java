@@ -1,10 +1,10 @@
-package com.jianma.tagsystem.dao;
+package com.jianma.tagsystem.service;
 
 import java.util.List;
 
 import com.jianma.tagsystem.module.Tag;
 
-public interface TagDao {
+public interface TagService {
 
 	public int createTag(Tag tag);
 	

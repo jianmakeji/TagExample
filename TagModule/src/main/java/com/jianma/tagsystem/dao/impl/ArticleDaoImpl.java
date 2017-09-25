@@ -22,8 +22,13 @@ public class ArticleDaoImpl implements ArticleDao {
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
 	
+	
 	@Override
 	public int createArticle(Article article) {
+		/*Session session = sessionFactory.openSession();
+		session.save(article);
+		session.close();
+		*/
 		return (int)sessionFactory.getCurrentSession().save(article);
 	}
 
