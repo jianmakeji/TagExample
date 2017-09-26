@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jianma.tagsystem.dao.TagDao;
@@ -15,7 +16,7 @@ import com.jianma.tagsystem.service.TagService;
 @Service
 @Component
 @Qualifier(value = "tagServiceImpl")
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class TagServiceImpl implements TagService {
 
 	@Autowired
@@ -38,6 +39,7 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public List<Tag> getTagByPage(int offset, int limit) {
 
 
@@ -45,6 +47,7 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public List<Tag> getListTagByCategory(int id) {
 		return tagDaoImpl.getListTagByCategory(id);
 	}

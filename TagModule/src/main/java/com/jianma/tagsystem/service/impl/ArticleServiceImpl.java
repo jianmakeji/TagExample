@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jianma.tagsystem.dao.ArticleDao;
@@ -18,7 +19,7 @@ import com.jianma.tagsystem.service.ArticleService;
 @Service
 @Component
 @Qualifier(value = "articleServiceImpl")
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 //@Scope(value = "prototype")
 public class ArticleServiceImpl implements ArticleService {
 
@@ -44,18 +45,21 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public List<Article> getArticleByPage(int offset, int limit) {
 
 		return articleDaoImpl.getArticleByPage(offset, limit);
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public Article getArticleDetailById(int id) {
 
 		return articleDaoImpl.getArticleDetailById(id);
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public List<Article> getArticlePageByTag(Map<Integer, List<Integer>> tagMap) {
 
 		return null;
