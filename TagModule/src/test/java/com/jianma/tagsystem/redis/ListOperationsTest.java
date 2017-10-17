@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -21,7 +22,13 @@ public class ListOperationsTest {
 	@Autowired
 	private RedisTemplate<String, Person> template;
 	
-	@Test
+	@Autowired
+	private JedisConnectionFactory jedisConnectionFactory;
+	
+	@Autowired
+	private RedisTemplate<String, String> templateString;
+	
+	//@Test
 	public void ListTest(){
 		
 		template.setKeySerializer(new StringRedisSerializer());
@@ -34,5 +41,9 @@ public class ListOperationsTest {
 		*/
 		ListOperations<String, Person> listOps = template.opsForList();
 		listOps.rightPush("PersonList", new Person("Jane", "Smith"));
+	}
+	
+	public void addData(){
+		
 	}
 }
